@@ -20,6 +20,12 @@ const playfairDisplay = Playfair_Display({
   display: "swap",
 });
 
+export const viewport = {
+  themeColor: "#1A2E4A",
+  width: "device-width",
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   title: "StayPH — Find your home away from home",
   description:
@@ -31,6 +37,12 @@ export const metadata: Metadata = {
     siteName: "StayPH",
     locale: "en_PH",
     type: "website",
+  },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "StayPH",
   },
 };
 

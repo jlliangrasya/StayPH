@@ -219,7 +219,7 @@ export default function FeaturedListings() {
             </h2>
           </div>
           <Link
-            href="#"
+            href="/cebu"
             className="text-coral font-semibold text-sm flex items-center gap-1.5 hover:gap-3 transition-all duration-200 flex-shrink-0"
             style={{ fontFamily: "var(--font-plus-jakarta)" }}
           >
@@ -237,7 +237,7 @@ export default function FeaturedListings() {
         {/* CTA below listings */}
         <div className="text-center mt-10">
           <Link
-            href="#"
+            href="/cebu"
             className="inline-flex items-center gap-2 bg-navy text-white font-semibold text-sm px-8 py-3.5 rounded-xl hover:bg-navy-light transition-colors shadow-sm"
             style={{ fontFamily: "var(--font-plus-jakarta)" }}
           >

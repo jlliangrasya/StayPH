@@ -6,9 +6,9 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Find a Room", href: "#listings" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "For Landlords", href: "#landlords" },
+  { label: "Find a Room", href: "/cebu" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "For Landlords", href: "/#landlords" },
 ];
 
 export default function Navbar() {

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Search, MapPin, ShieldCheck, Eye } from "lucide-react";
+import { ShieldCheck, Eye } from "lucide-react";
+import HeroSearch from "@/components/landing/HeroSearch";
 
 export default function HeroSection() {
   return (
@@ -69,38 +70,9 @@ export default function HeroSection() {
               Every listing is reviewed by a real person — not just an algorithm.
             </p>
 
-            {/* Search bar */}
-            <div className="bg-white rounded-2xl shadow-lg border border-warm-white-dark p-2 flex flex-col sm:flex-row gap-2 mb-6 max-w-lg mx-auto lg:mx-0">
-              <div className="flex items-center gap-2 flex-1 px-3 py-2">
-                <MapPin size={18} className="text-coral flex-shrink-0" />
-                <input
-                  type="text"
-                  placeholder="City, university, or barangay..."
-                  className="flex-1 text-charcoal placeholder-charcoal/40 text-sm bg-transparent outline-none"
-                  style={{ fontFamily: "var(--font-inter)" }}
-                />
-              </div>
-              <Link
-                href="#listings"
-                className="bg-coral text-white font-semibold text-sm px-6 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-coral-dark transition-colors shadow-sm flex-shrink-0"
-                style={{ fontFamily: "var(--font-plus-jakarta)" }}
-              >
-                <Search size={16} />
-                Search
-              </Link>
-            </div>
-
-            {/* Quick filters */}
-            <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-8">
-              {["Near USC Cebu", "Near UV Visayas", "Near CIT-U", "Female Only", "₱3,000 & below"].map((tag) => (
-                <button
-                  key={tag}
-                  className="bg-warm-white border border-warm-white-dark text-charcoal text-xs font-medium px-3 py-1.5 rounded-full hover:border-coral hover:text-coral transition-colors"
-                  style={{ fontFamily: "var(--font-inter)" }}
-                >
-                  {tag}
-                </button>
-              ))}
+            {/* Search bar + quick filters */}
+            <div className="mb-8 max-w-lg mx-auto lg:mx-0">
+              <HeroSearch />
             </div>
 
             {/* Trust row */}

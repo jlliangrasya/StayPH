@@ -1,0 +1,26 @@
+{
+  "name": "StayPH",
+  "short_name": "StayPH",
+  "description": "Find verified boarding houses and bedspaces near your university or workplace.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDF8F4",
+  "theme_color": "#1A2E4A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "travel", "utilities"],
+  "lang": "en-PH"
+}
