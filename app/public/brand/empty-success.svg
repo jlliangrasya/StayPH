@@ -1,0 +1,43 @@
+<svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Success illustration">
+  <defs>
+    <linearGradient id="bgSuccess" x1="0" y1="0" x2="400" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F0FFF4"/>
+      <stop offset="100%" stop-color="#FDF8F4"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="280" fill="url(#bgSuccess)" rx="16"/>
+
+  <!-- House -->
+  <g>
+    <rect x="140" y="140" width="120" height="90" rx="5" fill="#E8D4BE"/>
+    <!-- Roof -->
+    <path d="M128 148L200 100L272 148Z" fill="#FF6B4A"/>
+    <!-- Door -->
+    <rect x="182" y="185" width="36" height="45" rx="4" fill="#C47840"/>
+    <!-- Windows -->
+    <rect x="152" y="160" width="28" height="22" rx="3" fill="#FFB830" fill-opacity="0.8"/>
+    <rect x="220" y="160" width="28" height="22" rx="3" fill="#FFB830" fill-opacity="0.8"/>
+    <!-- Window shine -->
+    <path d="M154 162L162 162L154 170Z" fill="white" fill-opacity="0.4"/>
+    <path d="M222 162L230 162L222 170Z" fill="white" fill-opacity="0.4"/>
+  </g>
+
+  <!-- Big green checkmark circle -->
+  <circle cx="280" cy="110" r="42" fill="#34A853"/>
+  <path d="M261 110L275 124L302 97" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Confetti dots -->
+  <circle cx="80" cy="80" r="7" fill="#FF6B4A" fill-opacity="0.7"/>
+  <circle cx="105" cy="55" r="5" fill="#FFB830" fill-opacity="0.8"/>
+  <circle cx="60" cy="110" r="4" fill="#34A853" fill-opacity="0.7"/>
+  <circle cx="340" cy="60" r="6" fill="#FFB830" fill-opacity="0.7"/>
+  <circle cx="360" cy="90" r="4" fill="#FF6B4A" fill-opacity="0.6"/>
+  <circle cx="320" cy="175" r="5" fill="#34A853" fill-opacity="0.6"/>
+  <rect x="110" y="70" width="8" height="8" rx="2" fill="#FFB830" fill-opacity="0.6" transform="rotate(20 110 70)"/>
+  <rect x="340" y="155" width="8" height="8" rx="2" fill="#FF6B4A" fill-opacity="0.5" transform="rotate(35 340 155)"/>
+  <rect x="70" y="145" width="6" height="6" rx="1" fill="#34A853" fill-opacity="0.5" transform="rotate(15 70 145)"/>
+
+  <!-- Text -->
+  <text x="200" y="252" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="16" font-weight="700" fill="#1A2E4A" text-anchor="middle">You're all set!</text>
+  <text x="200" y="270" font-family="'Inter', system-ui, sans-serif" font-size="12" fill="#5A8A4A" text-anchor="middle">Your room is booked and verified.</text>
+</svg>

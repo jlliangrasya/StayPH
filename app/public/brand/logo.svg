@@ -1,0 +1,15 @@
+<svg viewBox="0 0 220 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="StayPH logo">
+  <!-- House + Pin Icon -->
+  <g>
+    <!-- Pin drop body -->
+    <path d="M20 4C14.477 4 10 8.477 10 14C10 20.5 20 34 20 34C20 34 30 20.5 30 14C30 8.477 25.523 4 20 4Z" fill="#FF6B4A"/>
+    <!-- Pin inner circle -->
+    <circle cx="20" cy="14" r="5" fill="white"/>
+    <!-- Tiny rooftop inside pin -->
+    <path d="M16.5 14.5L20 11.5L23.5 14.5" stroke="#FF6B4A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="17.5" y="14.5" width="5" height="3" rx="0.5" fill="#FF6B4A"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="38" y="32" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="600" fill="#1A2E4A" letter-spacing="-0.5">Stay</text>
+  <text x="102" y="32" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="800" fill="#1A2E4A" letter-spacing="-0.5">PH</text>
+</svg>

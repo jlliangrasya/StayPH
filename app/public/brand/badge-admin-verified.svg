@@ -1,0 +1,7 @@
+<svg viewBox="0 0 160 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Admin Verified badge">
+  <rect width="160" height="34" rx="17" fill="#34A853"/>
+  <!-- Checkmark shield -->
+  <path d="M18 7L25 10V15.5C25 19.1 21.9 22.4 18 23.5C14.1 22.4 11 19.1 11 15.5V10L18 7Z" fill="white" fill-opacity="0.25"/>
+  <path d="M15 16.5L17.5 19L22 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="31" y="22" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="white" letter-spacing="0.2">Admin Verified</text>
+</svg>

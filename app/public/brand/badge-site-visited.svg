@@ -1,0 +1,7 @@
+<svg viewBox="0 0 150 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Site Visited badge">
+  <rect width="150" height="34" rx="17" fill="#243d60"/>
+  <!-- House icon -->
+  <path d="M18 9L26 15.5V25H20V19H16V25H10V15.5L18 9Z" fill="white" fill-opacity="0.2"/>
+  <path d="M14 25V19H22V25M10 17L18 10L26 17" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="31" y="22" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11.5" font-weight="700" fill="white" letter-spacing="0.2">Site Visited</text>
+</svg>

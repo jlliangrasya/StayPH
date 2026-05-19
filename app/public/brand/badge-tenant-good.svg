@@ -1,0 +1,5 @@
+<svg viewBox="0 0 148 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Good Tenant badge">
+  <rect width="148" height="34" rx="17" fill="#FFF3D4"/>
+  <path d="M18 8.5L19.545 13.41H24.708L20.581 16.395L22.127 21.305L18 18.32L13.873 21.305L15.419 16.395L11.292 13.41H16.455L18 8.5Z" fill="#FFB830"/>
+  <text x="31" y="22" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11.5" font-weight="700" fill="#1A2E4A" letter-spacing="0.2">Good Tenant</text>
+</svg>

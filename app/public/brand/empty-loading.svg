@@ -1,0 +1,24 @@
+<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Loading indicator">
+  <!-- Spinning ring -->
+  <circle cx="100" cy="100" r="70" stroke="#FFE8D6" stroke-width="8"/>
+  <circle cx="100" cy="100" r="70" stroke="#FF6B4A" stroke-width="8" stroke-linecap="round"
+    stroke-dasharray="110 330">
+    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="1.2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Center pin icon -->
+  <path d="M100 60C88.954 60 80 68.954 80 80C80 93.5 100 118 100 118C100 118 120 93.5 120 80C120 68.954 111.046 60 100 60Z" fill="#FF6B4A"/>
+  <circle cx="100" cy="80" r="11" fill="white"/>
+  <!-- Mini house in pin -->
+  <path d="M94 81L100 75.5L106 81" stroke="#FF6B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="95.5" y="81" width="9" height="6.5" rx="1" fill="#FF6B4A"/>
+
+  <!-- Pulsing outer ring -->
+  <circle cx="100" cy="80" r="18" fill="#FF6B4A" fill-opacity="0">
+    <animate attributeName="r" from="14" to="30" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="fill-opacity" from="0.25" to="0" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Loading text -->
+  <text x="100" y="150" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="600" fill="#1A2E4A" text-anchor="middle">Finding your room...</text>
+</svg>
