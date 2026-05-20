@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, Bookmark, MessageSquare, LayoutDashboard, LogOut, ChevronDown, Calendar } from "lucide-react";
+import { Menu, X, Bookmark, MessageSquare, LayoutDashboard, LogOut, ChevronDown, Calendar, UserCircle } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import AuthModal from "@/components/auth/AuthModal";
 
@@ -112,6 +112,14 @@ export default function Navbar() {
                           <span className="inline-block mt-1 text-xs bg-coral/10 text-coral px-2 py-0.5 rounded-full font-medium capitalize">{user.role}</span>
                         </div>
                         <div className="py-1">
+                          <Link
+                            href="/profile"
+                            onClick={() => setProfileOpen(false)}
+                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-charcoal hover:bg-warm-white-dark transition-colors"
+                          >
+                            <UserCircle size={15} className="text-charcoal-light" />
+                            My Profile
+                          </Link>
                           {user.role === 'admin' && (
                             <Link
                               href="/admin"
@@ -231,6 +239,9 @@ export default function Navbar() {
                       <p className="text-xs text-charcoal-light capitalize">{user.role}</p>
                     </div>
                   </div>
+                  <Link href="/profile" onClick={() => setIsOpen(false)} className="flex items-center gap-2 py-2.5 px-3 rounded-lg hover:bg-warm-white-dark text-charcoal text-sm">
+                    <UserCircle size={16} /> My Profile
+                  </Link>
                   <Link href="/saved" onClick={() => setIsOpen(false)} className="flex items-center gap-2 py-2.5 px-3 rounded-lg hover:bg-warm-white-dark text-charcoal text-sm">
                     <Bookmark size={16} /> Saved Listings
                   </Link>

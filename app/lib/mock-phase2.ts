@@ -40,6 +40,18 @@ export const MOCK_USERS: User[] = [
     created_at: '2025-02-15T00:00:00Z',
   },
   {
+    id: 'landlord-001',
+    email: 'landlord@stayph.com',
+    phone: '09171234567',
+    full_name: 'Nena Santos',
+    role: 'landlord',
+    avatar_url: null,
+    is_phone_verified: true,
+    is_id_verified: true,
+    is_suspended: false,
+    created_at: '2024-01-15T00:00:00Z',
+  },
+  {
     id: 'user-admin-001',
     email: 'admin@stayph.com',
     phone: '09170000001',

@@ -18,10 +18,11 @@ export default function MessagesPage() {
   useEffect(() => {
     if (!user) return
     // TODO: fetch from Supabase conversations table where tenant_id or landlord_id = user.id
-    const userConvs = MOCK_CONVERSATIONS.filter(
+    const matched = MOCK_CONVERSATIONS.filter(
       c => c.tenant_id === user.id || c.landlord_id === user.id
     )
-    setConversations(userConvs)
+    // Demo fallback: show all mock conversations when no match (mock IDs don't match dynamic users)
+    setConversations(matched.length > 0 ? matched : MOCK_CONVERSATIONS)
   }, [user])
 
   return (

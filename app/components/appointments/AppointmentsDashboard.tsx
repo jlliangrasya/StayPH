@@ -122,9 +122,11 @@ export default function AppointmentsDashboard() {
   }
 
   const isLandlord = user.role === 'landlord' || user.role === 'admin'
-  const userAppts = appointments.filter(a =>
-    isLandlord ? a.landlord_id === user.id || true : a.tenant_id === user.id || true
+  const matched = appointments.filter(a =>
+    isLandlord ? a.landlord_id === user.id : a.tenant_id === user.id
   )
+  // Demo fallback: show all mock appointments when user has none (mock IDs don't match real user IDs)
+  const userAppts = matched.length > 0 ? matched : appointments
 
   const now = new Date()
   const upcoming = userAppts.filter(a => ['pending', 'confirmed'].includes(a.status) && new Date(a.proposed_date) >= now)

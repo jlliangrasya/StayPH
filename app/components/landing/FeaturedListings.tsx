@@ -4,7 +4,7 @@ import { MapPin, Star } from "lucide-react";
 
 const mockListings = [
   {
-    slug: "tita-nenas-boarding-house-lahug",
+    slug: "00000000-0000-0000-0000-000000000001",
     title: "Tita Nena's Boarding House",
     location: "Lahug, Cebu City",
     nearSchool: "Near USC",
@@ -21,7 +21,7 @@ const mockListings = [
     coverColor: "from-coral/20 to-golden/10",
   },
   {
-    slug: "casa-verde-bedspace-talamban",
+    slug: "00000000-0000-0000-0000-000000000002",
     title: "Casa Verde Bedspace",
     location: "Talamban, Cebu City",
     nearSchool: "Near CIT-U",
@@ -38,7 +38,7 @@ const mockListings = [
     coverColor: "from-leaf/20 to-navy/10",
   },
   {
-    slug: "kuya-bens-studio-room-banilad",
+    slug: "00000000-0000-0000-0000-000000000003",
     title: "Kuya Ben's Studio Room",
     location: "Banilad, Cebu City",
     nearSchool: "Near UV Visayas",
@@ -55,8 +55,8 @@ const mockListings = [
     coverColor: "from-navy/15 to-coral/8",
   },
   {
-    slug: "mabolo-bedspace-for-girls",
-    title: "Mabolo Bedspace for Girls",
+    slug: "00000000-0000-0000-0000-000000000004",
+    title: "Mabolo Girls Boarding House",
     location: "Mabolo, Cebu City",
     nearSchool: "Near Cebu Normal",
     price: 3200,
@@ -72,8 +72,8 @@ const mockListings = [
     coverColor: "from-golden/20 to-coral/10",
   },
   {
-    slug: "urgello-monthly-room",
-    title: "Urgello Monthly Room",
+    slug: "00000000-0000-0000-0000-000000000005",
+    title: "Urgello Private Room",
     location: "Urgello, Cebu City",
     nearSchool: "Near Cebu Doc",
     price: 5500,
@@ -89,20 +89,20 @@ const mockListings = [
     coverColor: "from-coral/15 to-navy/8",
   },
   {
-    slug: "mandaue-working-adults-house",
-    title: "Mandaue Working Adults House",
-    location: "Centro, Mandaue City",
-    nearSchool: "Business District",
-    price: 4200,
-    type: "Bedspace",
+    slug: "00000000-0000-0000-0000-000000000006",
+    title: "IT Park Residences",
+    location: "Apas, Cebu City",
+    nearSchool: "Near IT Park",
+    price: 7500,
+    type: "Private Room",
     gender: "Mixed",
-    rating: 4.8,
-    reviews: 15,
+    rating: 4.9,
+    reviews: 41,
     badge: "top-pick",
     badgeLabel: "👑 Top Pick",
     badgeBg: "bg-coral",
     badgeText: "text-white",
-    inclusions: ["WiFi", "Water", "Electricity", "Laundry"],
+    inclusions: ["WiFi", "Water", "Electricity", "Aircon"],
     coverColor: "from-coral/25 to-golden/15",
   },
 ];

@@ -12,9 +12,10 @@ function load(userId: string): string[] {
   if (typeof window === 'undefined') return []
   try {
     const raw = localStorage.getItem(`${STORAGE_KEY}_${userId}`)
-    if (raw) return JSON.parse(raw) as string[]
+    // Only seed when key has never been set (null), not when it's an empty array
+    if (raw !== null) return JSON.parse(raw) as string[]
   } catch {}
-  // Seed from mock data on first load
+  // Seed from mock data on first load for this user
   const seeded = MOCK_BOOKMARKS.filter(b => b.tenant_id === userId).map(b => b.listing_id)
   save(userId, seeded)
   return seeded

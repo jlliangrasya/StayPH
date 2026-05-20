@@ -2,24 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 
 const forTenants = [
-  { label: "Browse Listings", href: "#" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Trust & Safety", href: "#" },
-  { label: "Cancellation Policy", href: "#" },
+  { label: "Browse Listings", href: "/cebu" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Trust & Safety", href: "/#listings" },
+  { label: "List Your Property", href: "/list-your-property" },
 ];
 
 const forLandlords = [
-  { label: "List Your Property", href: "#" },
-  { label: "Get Verified", href: "#" },
-  { label: "Request Preferred Visit", href: "#" },
-  { label: "Landlord Dashboard", href: "#" },
+  { label: "List Your Property", href: "/list-your-property" },
+  { label: "Get Verified", href: "/verify-docs" },
+  { label: "Request Preferred Visit", href: "/list-your-property" },
+  { label: "Landlord Dashboard", href: "/dashboard" },
 ];
 
 const company = [
-  { label: "About StayPH", href: "#" },
-  { label: "Our Team", href: "#" },
-  { label: "Blog", href: "#" },
-  { label: "Contact Us", href: "#" },
+  { label: "About StayPH", href: "/#how-it-works" },
+  { label: "For Landlords", href: "/#listings" },
+  { label: "Browse Cebu", href: "/cebu" },
+  { label: "Contact Us", href: "/messages" },
 ];
 
 export default function Footer() {

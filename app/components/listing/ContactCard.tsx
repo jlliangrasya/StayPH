@@ -16,7 +16,7 @@ export default function ContactCard({ listing }: { listing: ListingDetail }) {
   const [authOpen, setAuthOpen] = useState(false)
   const [paymentType, setPaymentType] = useState<'escrow_deposit' | 'featured_listing' | 'preferred_visit' | null>(null)
 
-  const isLandlord = user?.role === 'landlord' || user?.id === listing.landlord.id
+  const isLandlord = user?.role === 'landlord' || user?.id === listing.landlord?.id
 
   const waNumber = listing.landlord?.phone?.replace(/\D/g, "")
   const waMessage = encodeURIComponent(
@@ -152,8 +152,8 @@ export default function ContactCard({ listing }: { listing: ListingDetail }) {
         onClose={() => setViewingOpen(false)}
         listingId={listing.id}
         listingTitle={listing.title}
-        landlordId={listing.landlord.id}
-        landlordName={listing.landlord.full_name}
+        landlordId={listing.landlord?.id ?? ''}
+        landlordName={listing.landlord?.full_name ?? 'Landlord'}
         onAuthRequired={() => { setViewingOpen(false); setAuthOpen(true) }}
       />
       <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} defaultMode="signin" />

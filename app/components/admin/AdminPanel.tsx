@@ -215,7 +215,10 @@ function ListingsQueue() {
                   ✕ Remove Preferred tag
                 </button>
               )}
-              <button className="text-xs bg-navy/8 text-navy border border-navy/20 px-3 py-1.5 rounded-lg font-semibold hover:bg-navy/15 transition-colors">
+              <button
+                onClick={() => alert(`Document request sent to landlord for "${listing.title}".`)}
+                className="text-xs bg-navy/8 text-navy border border-navy/20 px-3 py-1.5 rounded-lg font-semibold hover:bg-navy/15 transition-colors"
+              >
                 📝 Request more docs
               </button>
             </div>
@@ -454,6 +457,29 @@ const RECOMMENDATION_CONFIG: Record<string, { emoji: string; label: string; colo
 
 function VisitReportsQueue() {
   const [expanded, setExpanded] = useState<string | null>(null)
+  const [listings, setListings] = useState(() => [...MOCK_LISTINGS])
+  const [actioned, setActioned] = useState<Record<string, string>>({})
+
+  function grantPreferred(listingId: string) {
+    setListings(ls => ls.map(l =>
+      l.id === listingId ? { ...l, is_preferred: true, is_admin_verified: true } : l
+    ))
+    setActioned(a => ({ ...a, [listingId]: 'preferred' }))
+  }
+
+  function grantAdminVerified(listingId: string) {
+    setListings(ls => ls.map(l =>
+      l.id === listingId ? { ...l, is_admin_verified: true } : l
+    ))
+    setActioned(a => ({ ...a, [listingId]: 'admin_verified' }))
+  }
+
+  function suspendListing(listingId: string) {
+    setListings(ls => ls.map(l =>
+      l.id === listingId ? { ...l, status: 'suspended' as const } : l
+    ))
+    setActioned(a => ({ ...a, [listingId]: 'suspended' }))
+  }
 
   return (
     <div className="space-y-3">
@@ -517,25 +543,46 @@ function VisitReportsQueue() {
                 )}
 
                 <div className="flex gap-2 flex-wrap">
-                  {report.recommendation === 'preferred' && (
-                    <button className="text-xs bg-golden/10 text-golden border border-golden/30 px-3 py-1.5 rounded-lg font-semibold hover:bg-golden/20 transition-colors">
+                  {report.recommendation === 'preferred' && actioned[report.listing_id] !== 'preferred' && (
+                    <button
+                      onClick={() => grantPreferred(report.listing_id)}
+                      className="text-xs bg-golden/10 text-golden border border-golden/30 px-3 py-1.5 rounded-lg font-semibold hover:bg-golden/20 transition-colors"
+                    >
                       ⭐ Grant Preferred
                     </button>
                   )}
-                  {(report.recommendation === 'preferred' || report.recommendation === 'admin_verified') && (
-                    <button className="text-xs bg-leaf/10 text-leaf border border-leaf/30 px-3 py-1.5 rounded-lg font-semibold hover:bg-leaf/20 transition-colors">
+                  {actioned[report.listing_id] === 'preferred' && (
+                    <span className="text-xs text-golden font-semibold flex items-center gap-1"><CheckCircle size={12} /> Preferred granted</span>
+                  )}
+                  {(report.recommendation === 'preferred' || report.recommendation === 'admin_verified') && actioned[report.listing_id] !== 'admin_verified' && actioned[report.listing_id] !== 'preferred' && (
+                    <button
+                      onClick={() => grantAdminVerified(report.listing_id)}
+                      className="text-xs bg-leaf/10 text-leaf border border-leaf/30 px-3 py-1.5 rounded-lg font-semibold hover:bg-leaf/20 transition-colors"
+                    >
                       ✅ Mark Admin Verified
                     </button>
                   )}
+                  {actioned[report.listing_id] === 'admin_verified' && (
+                    <span className="text-xs text-leaf font-semibold flex items-center gap-1"><CheckCircle size={12} /> Admin verified</span>
+                  )}
                   {report.recommendation === 'needs_improvement' && (
-                    <button className="text-xs bg-amber/10 text-amber border border-amber/30 px-3 py-1.5 rounded-lg font-semibold hover:bg-amber/20 transition-colors">
+                    <button
+                      onClick={() => alert(`Improvement notice sent to landlord for "${report.listing_title}".`)}
+                      className="text-xs bg-amber/10 text-amber border border-amber/30 px-3 py-1.5 rounded-lg font-semibold hover:bg-amber/20 transition-colors"
+                    >
                       📩 Send improvement notice
                     </button>
                   )}
-                  {report.recommendation === 'reject' && (
-                    <button className="text-xs bg-soft-red/10 text-soft-red border border-soft-red/30 px-3 py-1.5 rounded-lg font-semibold hover:bg-soft-red/20 transition-colors">
+                  {report.recommendation === 'reject' && actioned[report.listing_id] !== 'suspended' && (
+                    <button
+                      onClick={() => suspendListing(report.listing_id)}
+                      className="text-xs bg-soft-red/10 text-soft-red border border-soft-red/30 px-3 py-1.5 rounded-lg font-semibold hover:bg-soft-red/20 transition-colors"
+                    >
                       🚫 Suspend listing
                     </button>
+                  )}
+                  {actioned[report.listing_id] === 'suspended' && (
+                    <span className="text-xs text-soft-red font-semibold flex items-center gap-1"><XCircle size={12} /> Listing suspended</span>
                   )}
                   <Link
                     href={`/visit-report/${report.listing_id}`}

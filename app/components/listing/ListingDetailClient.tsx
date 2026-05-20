@@ -24,7 +24,7 @@ export default function ListingDetailClient({ listing }: ListingDetailClientProp
   const [authOpen, setAuthOpen] = useState(false)
 
   const reviews = MOCK_REVIEWS.filter(r => r.listing_id === listing.id)
-  const isLandlord = user?.id === listing.landlord.id || user?.role === 'landlord'
+  const isLandlord = user?.id === listing.landlord?.id || user?.role === 'landlord'
 
   return (
     <>
@@ -54,7 +54,7 @@ export default function ListingDetailClient({ listing }: ListingDetailClientProp
 
       {/* ── Landlord badges (enhanced) ─────────────────────── */}
       <div className="mt-4">
-        <LandlordBadges landlord={listing.landlord} memberSince={listing.landlord.created_at} />
+        {listing.landlord && <LandlordBadges landlord={listing.landlord} memberSince={listing.landlord.created_at} />}
       </div>
 
       {/* ── Lease Generator (landlord only) ───────────────── */}
@@ -68,9 +68,9 @@ export default function ListingDetailClient({ listing }: ListingDetailClientProp
             monthlyRent={listing.price_monthly}
             includedUtilities={listing.listing_amenities.map(a => a.amenity)}
             houseRules={listing.house_rules}
-            landlordId={listing.landlord.id}
-            landlordName={listing.landlord.full_name}
-            landlordPhone={listing.landlord.phone}
+            landlordId={listing.landlord?.id}
+            landlordName={listing.landlord?.full_name}
+            landlordPhone={listing.landlord?.phone}
           />
         </div>
       )}
@@ -91,8 +91,8 @@ export default function ListingDetailClient({ listing }: ListingDetailClientProp
         onClose={() => setViewingOpen(false)}
         listingId={listing.id}
         listingTitle={listing.title}
-        landlordId={listing.landlord.id}
-        landlordName={listing.landlord.full_name}
+        landlordId={listing.landlord?.id ?? ''}
+        landlordName={listing.landlord?.full_name ?? 'Landlord'}
         onAuthRequired={() => { setViewingOpen(false); setAuthOpen(true) }}
       />
       <ReportModal

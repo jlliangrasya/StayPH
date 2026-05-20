@@ -18,9 +18,40 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null)
 
 const STORAGE_KEY = 'stayph_mock_user_id'
+const STORAGE_USER_KEY = 'stayph_mock_user_data'
 
 function mockSignIn(email: string): User | null {
-  return MOCK_USERS.find(u => u.email === email) ?? null
+  // Check in-memory list first, then localStorage-persisted custom users
+  const inMemory = MOCK_USERS.find(u => u.email === email)
+  if (inMemory) return inMemory
+  try {
+    const raw = localStorage.getItem(STORAGE_USER_KEY)
+    if (raw) {
+      const users: User[] = JSON.parse(raw)
+      return users.find(u => u.email === email) ?? null
+    }
+  } catch {}
+  return null
+}
+
+function saveCustomUser(newUser: User) {
+  try {
+    const raw = localStorage.getItem(STORAGE_USER_KEY)
+    const users: User[] = raw ? JSON.parse(raw) : []
+    if (!users.find(u => u.id === newUser.id)) users.push(newUser)
+    localStorage.setItem(STORAGE_USER_KEY, JSON.stringify(users))
+  } catch {}
+}
+
+function loadCustomUser(id: string): User | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_USER_KEY)
+    if (raw) {
+      const users: User[] = JSON.parse(raw)
+      return users.find(u => u.id === id) ?? null
+    }
+  } catch {}
+  return null
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -31,7 +62,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Rehydrate session from localStorage (mock only)
     const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
-      const found = MOCK_USERS.find(u => u.id === stored) ?? null
+      // First check mock users, then localStorage-persisted custom users
+      const found = MOCK_USERS.find(u => u.id === stored) ?? loadCustomUser(stored)
       setUser(found)
     }
     setIsLoading(false)
@@ -48,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signUpWithEmail = useCallback(async (email: string, _password: string, fullName: string, role: 'tenant' | 'landlord') => {
     // TODO: replace with supabase.auth.signUp then insert into users table
-    const existing = MOCK_USERS.find(u => u.email === email)
+    const existing = mockSignIn(email)
     if (existing) return { error: 'An account with that email already exists.' }
     const newUser: User = {
       id: `user-${Date.now()}`,
@@ -63,6 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       created_at: new Date().toISOString(),
     }
     MOCK_USERS.push(newUser)
+    saveCustomUser(newUser)
     setUser(newUser)
     localStorage.setItem(STORAGE_KEY, newUser.id)
     return { error: null }
