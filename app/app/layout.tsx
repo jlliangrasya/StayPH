@@ -25,6 +25,13 @@ export const metadata: Metadata = {
   description:
     "The Philippines' first verified boarding house and bedspace platform. Find safe, affordable long-term housing near your university or workplace.",
   keywords: ["boarding house", "bedspace", "Philippines", "student housing", "Cebu", "verified listings"],
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "StayPH",
+  },
+  formatDetection: { telephone: false },
   openGraph: {
     title: "StayPH — Find your home away from home",
     description: "Verified boarding houses and bedspaces near top Philippine universities.",

@@ -187,7 +187,7 @@ function ListingCard({ listing }: { listing: typeof mockListings[0] }) {
         </div>
 
         <Link
-          href="#"
+          href={`/listing/${listing.id}`}
           className="block w-full text-center bg-coral/8 text-coral font-semibold text-sm py-2.5 rounded-xl hover:bg-coral hover:text-white transition-all duration-200"
           style={{ fontFamily: "var(--font-plus-jakarta)" }}
         >
@@ -219,7 +219,7 @@ export default function FeaturedListings() {
             </h2>
           </div>
           <Link
-            href="#"
+            href="/listings"
             className="text-coral font-semibold text-sm flex items-center gap-1.5 hover:gap-3 transition-all duration-200 flex-shrink-0"
             style={{ fontFamily: "var(--font-plus-jakarta)" }}
           >
@@ -237,7 +237,7 @@ export default function FeaturedListings() {
         {/* CTA below listings */}
         <div className="text-center mt-10">
           <Link
-            href="#"
+            href="/listings"
             className="inline-flex items-center gap-2 bg-navy text-white font-semibold text-sm px-8 py-3.5 rounded-xl hover:bg-navy-light transition-colors shadow-sm"
             style={{ fontFamily: "var(--font-plus-jakarta)" }}
           >

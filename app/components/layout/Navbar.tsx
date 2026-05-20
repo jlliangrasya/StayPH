@@ -6,9 +6,9 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Find a Room", href: "#listings" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "For Landlords", href: "#landlords" },
+  { label: "Find a Room", href: "/listings" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "For Landlords", href: "/list-your-property" },
 ];
 
 export default function Navbar() {
@@ -66,7 +66,7 @@ export default function Navbar() {
               Log In
             </Link>
             <Link
-              href="/list"
+              href="/list-your-property"
               className="bg-coral text-white font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-coral-dark transition-all duration-200 shadow-sm hover:shadow-md"
               style={{ fontFamily: "var(--font-plus-jakarta)" }}
             >
@@ -113,7 +113,7 @@ export default function Navbar() {
               Log In
             </Link>
             <Link
-              href="/list"
+              href="/list-your-property"
               onClick={() => setIsOpen(false)}
               className="bg-coral text-white font-semibold text-base py-3 px-3 rounded-xl text-center hover:bg-coral-dark transition-colors shadow-sm"
               style={{ fontFamily: "var(--font-plus-jakarta)" }}
