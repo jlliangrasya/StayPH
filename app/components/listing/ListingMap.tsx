@@ -146,20 +146,34 @@ export default function ListingMap({ lat, lng, title, landmarks = [] }: Props) {
   return (
     <div className="rounded-2xl overflow-hidden border border-warm-white-dark shadow-sm">
       <div ref={containerRef} style={{ height: 360 }} />
-      {/* Legend */}
-      <div className="px-4 py-3 bg-white flex flex-wrap gap-4 border-t border-warm-white-dark">
-        <LegendItem color="#FF6B4A" label="This listing" />
-        {["school", "hospital", "mall", "church"].map((type) => {
-          if (!landmarks.some((l) => l.landmark_type === type)) return null
-          return (
-            <LegendItem
-              key={type}
-              color={LANDMARK_COLORS[type]}
-              emoji={LANDMARK_EMOJI[type]}
-              label={type.charAt(0).toUpperCase() + type.slice(1)}
-            />
-          )
-        })}
+      {/* Legend + Directions */}
+      <div className="px-4 py-3 bg-white flex flex-wrap items-center gap-4 border-t border-warm-white-dark">
+        <div className="flex flex-wrap gap-4 flex-1">
+          <LegendItem color="#FF6B4A" label="This listing" />
+          {["school", "hospital", "mall", "church"].map((type) => {
+            if (!landmarks.some((l) => l.landmark_type === type)) return null
+            return (
+              <LegendItem
+                key={type}
+                color={LANDMARK_COLORS[type]}
+                emoji={LANDMARK_EMOJI[type]}
+                label={type.charAt(0).toUpperCase() + type.slice(1)}
+              />
+            )
+          })}
+        </div>
+        <a
+          href={`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white shrink-0"
+          style={{ background: "#FF6B4A", fontFamily: "var(--font-inter)" }}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polygon points="3 11 22 2 13 21 11 13 3 11" />
+          </svg>
+          Get Directions
+        </a>
       </div>
     </div>
   )
