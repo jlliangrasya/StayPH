@@ -11,6 +11,7 @@ import Footer from "@/components/layout/Footer"
 import PhotoGallery from "@/components/listing/PhotoGallery"
 import ContactCard from "@/components/listing/ContactCard"
 import ListingMap from "@/components/listing/ListingMap"
+import ListingDetailClient from "@/components/listing/ListingDetailClient"
 import { getListing } from "@/lib/listings"
 import type { ListingDetail } from "@/lib/types"
 
@@ -108,6 +109,9 @@ export default async function ListingPage({ params }: PageProps) {
                   )}
                 </div>
               </div>
+
+              {/* Phase 2: save, report, mobile viewing CTA, badges, landlord badges */}
+              <ListingDetailClient listing={listing} />
 
               <hr className="border-warm-white-dark my-6" />
 
@@ -286,27 +290,14 @@ export default async function ListingPage({ params }: PageProps) {
                       Your landlord
                     </h2>
                     <div className="flex items-start gap-4">
-                      {/* Avatar */}
-                      <div className="w-14 h-14 bg-coral/15 rounded-full flex items-center justify-center flex-shrink-0 text-coral font-bold text-xl" style={{ fontFamily: "var(--font-plus-jakarta)" }}>
+                      <div className="w-14 h-14 bg-coral/15 rounded-full flex items-center justify-center shrink-0 text-coral font-bold text-xl" style={{ fontFamily: "var(--font-plus-jakarta)" }}>
                         {listing.landlord.full_name.charAt(0)}
                       </div>
                       <div>
                         <p className="text-navy font-bold" style={{ fontFamily: "var(--font-plus-jakarta)" }}>
                           {listing.landlord.full_name}
                         </p>
-                        <div className="flex flex-wrap gap-2 mt-1.5">
-                          {listing.landlord.is_phone_verified && (
-                            <span className="text-xs bg-leaf/10 text-leaf px-2 py-0.5 rounded-full" style={{ fontFamily: "var(--font-inter)" }}>
-                              ☎️ Phone Verified
-                            </span>
-                          )}
-                          {listing.landlord.is_id_verified && (
-                            <span className="text-xs bg-leaf/10 text-leaf px-2 py-0.5 rounded-full" style={{ fontFamily: "var(--font-inter)" }}>
-                              🪪 ID Verified
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-charcoal/50 text-xs mt-1.5" style={{ fontFamily: "var(--font-inter)" }}>
+                        <p className="text-charcoal/50 text-xs mt-1" style={{ fontFamily: "var(--font-inter)" }}>
                           Member since {new Date(listing.landlord.created_at).getFullYear()}
                         </p>
                       </div>
@@ -314,6 +305,12 @@ export default async function ListingPage({ params }: PageProps) {
                   </div>
                 </>
               )}
+
+              {/* Reviews — rendered by ListingDetailClient below */}
+              <hr className="border-warm-white-dark my-6" />
+              <h2 className="text-navy font-bold text-lg mb-4" style={{ fontFamily: "var(--font-plus-jakarta)" }}>
+                Reviews
+              </h2>
             </div>
 
             {/* ── Right column — sticky contact card ─────────── */}
