@@ -1,18 +1,22 @@
 "use client"
 
 import { useState } from "react"
-import { MessageCircle, Calendar, Shield, Phone, MessageSquare } from "lucide-react"
+import { MessageCircle, Calendar, Shield, Phone, MessageSquare, Lock, Star } from "lucide-react"
 import type { ListingDetail } from "@/lib/types"
 import { useAuth } from "@/lib/auth-context"
 import { BadgeRow } from "@/components/listing/TrustBadges"
 import RequestViewingModal from "@/components/listing/RequestViewingModal"
 import AuthModal from "@/components/auth/AuthModal"
+import PaymentModal from "@/components/payments/PaymentModal"
 import Link from "next/link"
 
 export default function ContactCard({ listing }: { listing: ListingDetail }) {
   const { user } = useAuth()
   const [viewingOpen, setViewingOpen] = useState(false)
   const [authOpen, setAuthOpen] = useState(false)
+  const [paymentType, setPaymentType] = useState<'escrow_deposit' | 'featured_listing' | 'preferred_visit' | null>(null)
+
+  const isLandlord = user?.role === 'landlord' || user?.id === listing.landlord.id
 
   const waNumber = listing.landlord?.phone?.replace(/\D/g, "")
   const waMessage = encodeURIComponent(
@@ -84,12 +88,47 @@ export default function ContactCard({ listing }: { listing: ListingDetail }) {
         {/* Request viewing */}
         <button
           onClick={() => user ? setViewingOpen(true) : setAuthOpen(true)}
-          className="flex items-center justify-center gap-2 w-full bg-navy/8 text-navy font-semibold text-sm py-3 rounded-xl hover:bg-navy/15 transition-colors mb-5"
+          className="flex items-center justify-center gap-2 w-full bg-navy/8 text-navy font-semibold text-sm py-3 rounded-xl hover:bg-navy/15 transition-colors mb-3"
           style={{ fontFamily: "var(--font-plus-jakarta)" }}
         >
           <Calendar size={16} />
           Request a Viewing
         </button>
+
+        {/* Escrow deposit (tenant) */}
+        {user && !isLandlord && listing.available_slots > 0 && (
+          <button
+            onClick={() => setPaymentType('escrow_deposit')}
+            className="flex items-center justify-center gap-2 w-full bg-leaf/10 text-leaf border border-leaf/30 font-semibold text-sm py-3 rounded-xl hover:bg-leaf/20 transition-colors mb-5"
+            style={{ fontFamily: "var(--font-plus-jakarta)" }}
+          >
+            <Lock size={16} />
+            Pay Deposit via Escrow
+          </button>
+        )}
+
+        {/* Landlord tools */}
+        {isLandlord && (
+          <div className="mb-5 space-y-2">
+            {!listing.is_preferred && (
+              <button
+                onClick={() => setPaymentType('preferred_visit')}
+                className="flex items-center justify-center gap-2 w-full bg-golden/10 text-golden border border-golden/30 font-semibold text-sm py-2.5 rounded-xl hover:bg-golden/20 transition-colors"
+                style={{ fontFamily: "var(--font-plus-jakarta)" }}
+              >
+                <Star size={15} />
+                Request Preferred Visit — ₱499
+              </button>
+            )}
+            <button
+              onClick={() => setPaymentType('featured_listing')}
+              className="flex items-center justify-center gap-2 w-full bg-coral/10 text-coral border border-coral/30 font-semibold text-sm py-2.5 rounded-xl hover:bg-coral/20 transition-colors"
+              style={{ fontFamily: "var(--font-plus-jakarta)" }}
+            >
+              ⭐ Feature this listing — ₱299/mo
+            </button>
+          </div>
+        )}
 
         {/* Trust badges */}
         <div className="border-t border-warm-white-dark pt-4 mb-4">
@@ -118,6 +157,16 @@ export default function ContactCard({ listing }: { listing: ListingDetail }) {
         onAuthRequired={() => { setViewingOpen(false); setAuthOpen(true) }}
       />
       <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} defaultMode="signin" />
+      {paymentType && (
+        <PaymentModal
+          isOpen={true}
+          onClose={() => setPaymentType(null)}
+          paymentType={paymentType}
+          listingId={listing.id}
+          listingTitle={listing.title}
+          depositAmount={listing.price_monthly * 2}
+        />
+      )}
     </>
   )
 }

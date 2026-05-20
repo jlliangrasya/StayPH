@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, Bookmark, MessageSquare, LayoutDashboard, LogOut, ChevronDown } from "lucide-react";
+import { Menu, X, Bookmark, MessageSquare, LayoutDashboard, LogOut, ChevronDown, Calendar } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import AuthModal from "@/components/auth/AuthModal";
 
@@ -138,6 +138,24 @@ export default function Navbar() {
                             <MessageSquare size={15} className="text-charcoal-light" />
                             Messages
                           </Link>
+                          <Link
+                            href="/appointments"
+                            onClick={() => setProfileOpen(false)}
+                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-charcoal hover:bg-warm-white-dark transition-colors"
+                          >
+                            <Calendar size={15} className="text-charcoal-light" />
+                            Appointments
+                          </Link>
+                          {(user.role === 'landlord' || user.role === 'admin') && (
+                            <Link
+                              href="/dashboard"
+                              onClick={() => setProfileOpen(false)}
+                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-charcoal hover:bg-warm-white-dark transition-colors"
+                            >
+                              <LayoutDashboard size={15} className="text-charcoal-light" />
+                              Landlord Dashboard
+                            </Link>
+                          )}
                         </div>
                         <div className="border-t border-warm-white-dark py-1">
                           <button
@@ -218,6 +236,9 @@ export default function Navbar() {
                   </Link>
                   <Link href="/messages" onClick={() => setIsOpen(false)} className="flex items-center gap-2 py-2.5 px-3 rounded-lg hover:bg-warm-white-dark text-charcoal text-sm">
                     <MessageSquare size={16} /> Messages
+                  </Link>
+                  <Link href="/appointments" onClick={() => setIsOpen(false)} className="flex items-center gap-2 py-2.5 px-3 rounded-lg hover:bg-warm-white-dark text-charcoal text-sm">
+                    <Calendar size={16} /> Appointments
                   </Link>
                   {user.role === 'admin' && (
                     <Link href="/admin" onClick={() => setIsOpen(false)} className="flex items-center gap-2 py-2.5 px-3 rounded-lg hover:bg-warm-white-dark text-charcoal text-sm">

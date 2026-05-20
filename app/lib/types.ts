@@ -286,3 +286,80 @@ export interface PriceHistory {
   change_reason: string | null
   changed_at: string
 }
+
+// ─── Payments ─────────────────────────────────────────────────────────────────
+
+export type PaymentType = 'featured_listing' | 'preferred_visit' | 'escrow_deposit'
+export type PaymentStatus = 'pending' | 'paid' | 'held' | 'released' | 'refunded' | 'failed'
+export type PaymentMethod = 'gcash' | 'paymongo'
+
+export interface Payment {
+  id: string
+  listing_id: string
+  listing_title: string
+  payer_id: string
+  payer_name: string
+  payment_type: PaymentType
+  payment_method: PaymentMethod
+  amount: number
+  status: PaymentStatus
+  reference_number: string | null
+  gcash_number: string | null
+  paymongo_payment_id: string | null
+  notes: string | null
+  paid_at: string | null
+  released_at: string | null
+  refunded_at: string | null
+  created_at: string
+}
+
+// ─── Lease Agreements ─────────────────────────────────────────────────────────
+
+export type LeaseStatus = 'draft' | 'signed_tenant' | 'signed_landlord' | 'active' | 'ended' | 'disputed'
+
+export interface LeaseAgreement {
+  id: string
+  listing_id: string
+  listing_title: string
+  listing_address: string
+  tenant_id: string
+  tenant_name: string
+  tenant_phone: string | null
+  landlord_id: string
+  landlord_name: string
+  landlord_phone: string | null
+  lease_start: string
+  lease_end: string
+  monthly_rent: number
+  deposit_amount: number
+  advance_months: number
+  included_utilities: string[]
+  house_rules: string | null
+  status: LeaseStatus
+  signed_by_tenant_at: string | null
+  signed_by_landlord_at: string | null
+  created_at: string
+}
+
+// ─── Background Checks ────────────────────────────────────────────────────────
+
+export type BackgroundCheckStatus = 'pending' | 'processing' | 'completed' | 'failed'
+
+export interface BackgroundCheck {
+  id: string
+  requested_by: string
+  requested_by_name: string
+  tenant_id: string
+  tenant_name: string
+  listing_id: string
+  listing_title: string
+  status: BackgroundCheckStatus
+  amount: number
+  result_summary: string | null
+  has_criminal_record: boolean | null
+  has_eviction_history: boolean | null
+  id_verified: boolean | null
+  notes: string | null
+  requested_at: string
+  completed_at: string | null
+}

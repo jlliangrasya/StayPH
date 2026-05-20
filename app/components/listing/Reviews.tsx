@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { Star, ThumbsUp, MessageSquare } from 'lucide-react'
+import { Star, MessageSquare, ShieldAlert } from 'lucide-react'
 import type { Review, ReviewFormData } from '@/lib/types'
 import { useAuth } from '@/lib/auth-context'
+import { MOCK_REVIEWS } from '@/lib/mock-phase2'
 
 // ─── Star Rating Input ────────────────────────────────────────────────────────
 
@@ -66,6 +67,7 @@ interface ReviewCardProps {
 export function ReviewCard({ review, onRespond, isLandlord }: ReviewCardProps) {
   const [responding, setResponding] = useState(false)
   const [responseText, setResponseText] = useState('')
+  const [localResponse, setLocalResponse] = useState(review.landlord_response)
 
   const initials = review.tenant.full_name
     .split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
@@ -80,7 +82,9 @@ export function ReviewCard({ review, onRespond, isLandlord }: ReviewCardProps) {
 
   function handleRespond() {
     if (!responseText.trim()) return
-    onRespond?.(review.id, responseText.trim())
+    const response = responseText.trim()
+    onRespond?.(review.id, response)
+    setLocalResponse(response)
     setResponding(false)
     setResponseText('')
   }
@@ -139,15 +143,15 @@ export function ReviewCard({ review, onRespond, isLandlord }: ReviewCardProps) {
       )}
 
       {/* Landlord response */}
-      {review.landlord_response && (
+      {localResponse && (
         <div className="bg-warm-white-dark rounded-lg px-4 py-3 border-l-2 border-coral">
           <p className="text-xs font-semibold text-coral mb-1">🏠 Landlord's response</p>
-          <p className="text-sm text-charcoal">{review.landlord_response}</p>
+          <p className="text-sm text-charcoal">{localResponse}</p>
         </div>
       )}
 
       {/* Landlord respond button */}
-      {isLandlord && !review.landlord_response && !responding && (
+      {isLandlord && !localResponse && !responding && (
         <button
           onClick={() => setResponding(true)}
           className="flex items-center gap-1.5 text-xs text-charcoal-light hover:text-coral transition-colors"
@@ -280,6 +284,11 @@ export function ReviewList({ reviews, listingId, averageRating, reviewCount }: R
   const { user } = useAuth()
   const [showForm, setShowForm] = useState(false)
   const [localReviews, setLocalReviews] = useState<Review[]>(reviews)
+  const [submitted, setSubmitted] = useState(false)
+
+  // Only phone-verified users can write reviews; ID-verified gets "Verified stay" badge
+  const canReview = user && user.is_phone_verified
+  const alreadyReviewed = user ? localReviews.some(r => r.tenant_id === user.id) : false
 
   function handleSubmit(data: ReviewFormData) {
     if (!user) return
@@ -299,11 +308,14 @@ export function ReviewList({ reviews, listingId, averageRating, reviewCount }: R
       landlord_responded_at: null,
       stay_from: data.stay_from || null,
       stay_to: data.stay_to || null,
-      is_verified_stay: false,
+      is_verified_stay: user.is_id_verified,
       created_at: new Date().toISOString(),
     }
+    // Persist to mock store so admin sees it
+    MOCK_REVIEWS.push(newReview)
     setLocalReviews(r => [newReview, ...r])
     setShowForm(false)
+    setSubmitted(true)
   }
 
   const subRatingAverages = [
@@ -339,19 +351,41 @@ export function ReviewList({ reviews, listingId, averageRating, reviewCount }: R
         </div>
       </div>
 
-      {/* Write review CTA */}
-      {user && !showForm && (
-        <button
-          onClick={() => setShowForm(true)}
-          className="w-full py-3 border-2 border-dashed border-warm-white-dark rounded-xl text-sm text-charcoal-light hover:border-coral/40 hover:text-coral transition-colors"
-        >
-          + Write a review
-        </button>
+      {/* Submission success */}
+      {submitted && (
+        <div className="bg-leaf/10 border border-leaf/30 rounded-xl px-4 py-3 text-sm text-leaf font-semibold">
+          ✅ Your review has been submitted! It will appear once verified.
+        </div>
       )}
-      {!user && (
-        <p className="text-sm text-charcoal-light text-center py-3 border border-warm-white-dark rounded-xl">
-          <span className="text-coral font-semibold">Sign in</span> to leave a review
-        </p>
+
+      {/* Write review CTA */}
+      {!submitted && !showForm && (
+        <>
+          {!user && (
+            <p className="text-sm text-charcoal-light text-center py-3 border border-warm-white-dark rounded-xl">
+              <span className="text-coral font-semibold">Sign in</span> to leave a review
+            </p>
+          )}
+          {user && !canReview && (
+            <div className="flex items-start gap-3 py-3 px-4 border border-amber/30 bg-amber/8 rounded-xl text-sm text-charcoal">
+              <ShieldAlert size={16} className="text-amber shrink-0 mt-0.5" />
+              <span>Verify your phone number to write a review.</span>
+            </div>
+          )}
+          {canReview && alreadyReviewed && (
+            <p className="text-sm text-charcoal-light text-center py-3 border border-warm-white-dark rounded-xl">
+              You've already reviewed this listing.
+            </p>
+          )}
+          {canReview && !alreadyReviewed && (
+            <button
+              onClick={() => setShowForm(true)}
+              className="w-full py-3 border-2 border-dashed border-warm-white-dark rounded-xl text-sm text-charcoal-light hover:border-coral/40 hover:text-coral transition-colors"
+            >
+              + Write a review
+            </button>
+          )}
+        </>
       )}
 
       {showForm && (

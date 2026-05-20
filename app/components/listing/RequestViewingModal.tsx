@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { X, Calendar, Clock, CheckCircle } from 'lucide-react'
 import { useAuth } from '@/lib/auth-context'
-import type { Appointment } from '@/lib/types'
+import { MOCK_APPOINTMENTS } from '@/lib/mock-phase2'
 
 interface RequestViewingModalProps {
   isOpen: boolean
@@ -41,15 +41,29 @@ export default function RequestViewingModal({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!date) return
+    if (!date || !user) return
     setIsLoading(true)
-    // TODO: insert into appointments table via Supabase
-    await new Promise(r => setTimeout(r, 600)) // mock delay
+    await new Promise(r => setTimeout(r, 500))
+
+    MOCK_APPOINTMENTS.push({
+      id: `appt-${Date.now()}`,
+      listing_id: listingId,
+      listing_title: listingTitle,
+      tenant_id: user.id,
+      landlord_id: landlordId,
+      other_user: { id: landlordId, full_name: landlordName, avatar_url: null },
+      proposed_date: `${date}T${time}:00Z`,
+      status: 'pending',
+      tenant_notes: notes || null,
+      landlord_notes: null,
+      post_visit_feedback: null,
+      created_at: new Date().toISOString(),
+    })
+
     setIsLoading(false)
     setSubmitted(true)
   }
 
-  // Min date = tomorrow
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
   const minDate = tomorrow.toISOString().split('T')[0]
