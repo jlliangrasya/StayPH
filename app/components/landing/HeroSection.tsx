@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ShieldCheck, Eye } from "lucide-react";
 import HeroSearch from "@/components/landing/HeroSearch";
 
@@ -70,46 +69,9 @@ export default function HeroSection() {
               Every listing is reviewed by a real person — not just an algorithm.
             </p>
 
-            {/* Search bar */}
-            <form action="/listings" method="GET" className="bg-white rounded-2xl shadow-lg border border-warm-white-dark p-2 flex flex-col sm:flex-row gap-2 mb-6 max-w-lg mx-auto lg:mx-0">
-              <div className="flex items-center gap-2 flex-1 px-3 py-2">
-                <MapPin size={18} className="text-coral flex-shrink-0" />
-                <input
-                  type="text"
-                  name="q"
-                  placeholder="City, university, or barangay..."
-                  className="flex-1 text-charcoal placeholder-charcoal/40 text-sm bg-transparent outline-none"
-                  style={{ fontFamily: "var(--font-inter)" }}
-                />
-              </div>
-              <button
-                type="submit"
-                className="bg-coral text-white font-semibold text-sm px-6 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-coral-dark transition-colors shadow-sm flex-shrink-0"
-                style={{ fontFamily: "var(--font-plus-jakarta)" }}
-              >
-                <Search size={16} />
-                Search
-              </button>
-            </form>
-
-            {/* Quick filters */}
-            <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-8">
-              {[
-                { label: "Near USC Cebu", href: "/listings?q=Near+USC" },
-                { label: "Near UV Visayas", href: "/listings?q=Near+UV" },
-                { label: "Near CIT-U", href: "/listings?q=Near+CIT-U" },
-                { label: "Female Only", href: "/listings?gender=female_only" },
-                { label: "₱3,000 & below", href: "/listings?price=3000" },
-              ].map(({ label, href }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  className="bg-warm-white border border-warm-white-dark text-charcoal text-xs font-medium px-3 py-1.5 rounded-full hover:border-coral hover:text-coral transition-colors"
-                  style={{ fontFamily: "var(--font-inter)" }}
-                >
-                  {label}
-                </Link>
-              ))}
+            {/* Search bar + quick filters */}
+            <div className="mb-8 max-w-lg mx-auto lg:mx-0">
+              <HeroSearch />
             </div>
 
             {/* Trust row */}

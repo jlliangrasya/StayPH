@@ -1,6 +1,15 @@
 import Link from "next/link";
 import { MapPin, Star } from "lucide-react";
-import { type Listing, BADGE_STYLES } from "@/lib/mock-listings";
+import type { Listing } from "@/lib/types";
+
+const COVER_COLORS = [
+  "from-coral/20 to-golden/10",
+  "from-leaf/20 to-navy/10",
+  "from-navy/15 to-coral/8",
+  "from-golden/20 to-coral/10",
+  "from-coral/15 to-navy/8",
+  "from-coral/25 to-golden/15",
+];
 
 function HouseIllustration({ color }: { color: string }) {
   return (
@@ -18,30 +27,44 @@ function HouseIllustration({ color }: { color: string }) {
   );
 }
 
-export default function ListingCard({ listing }: { listing: Listing }) {
-  const badgeStyle = BADGE_STYLES[listing.badge] ?? { bg: "bg-navy", text: "text-white" };
+function getBadge(listing: Listing): { label: string; bg: string; text: string } | null {
+  if (listing.is_top_pick)      return { label: "👑 Top Pick",       bg: "bg-coral",      text: "text-white"  };
+  if (listing.is_preferred)     return { label: "⭐ Preferred",       bg: "bg-navy",       text: "text-golden" };
+  if (listing.is_site_visited)  return { label: "🏘️ Site Visited",   bg: "bg-navy-light", text: "text-white"  };
+  if (listing.is_admin_verified)return { label: "✅ Admin Verified",  bg: "bg-leaf",       text: "text-white"  };
+  if (listing.is_id_verified)   return { label: "🪪 ID Verified",     bg: "bg-leaf",       text: "text-white"  };
+  return null;
+}
+
+export default function ListingCard({ listing, index = 0 }: { listing: Listing; index?: number }) {
+  const badge = getBadge(listing);
+  const coverColor = COVER_COLORS[index % COVER_COLORS.length];
+  const amenities = listing.listing_amenities.map((a) => a.amenity);
+  const slug = listing.id;
 
   return (
     <div className="bg-white rounded-2xl overflow-hidden border border-warm-white-dark hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col">
       {/* Cover */}
       <div className="relative h-44 overflow-hidden">
-        <HouseIllustration color={listing.coverColor} />
-        <div
-          className={`absolute top-3 left-3 ${badgeStyle.bg} ${badgeStyle.text} text-xs font-bold px-3 py-1 rounded-full`}
-          style={{ fontFamily: "var(--font-plus-jakarta)" }}
-        >
-          {listing.badgeLabel}
-        </div>
+        <HouseIllustration color={coverColor} />
+        {badge && (
+          <div
+            className={`absolute top-3 left-3 ${badge.bg} ${badge.text} text-xs font-bold px-3 py-1 rounded-full`}
+            style={{ fontFamily: "var(--font-plus-jakarta)" }}
+          >
+            {badge.label}
+          </div>
+        )}
         <div
           className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm text-navy font-bold text-sm px-3 py-1.5 rounded-xl shadow-sm"
           style={{ fontFamily: "var(--font-plus-jakarta)" }}
         >
-          ₱{listing.price.toLocaleString()}
+          ₱{listing.price_monthly.toLocaleString()}
           <span className="text-charcoal/50 font-normal text-xs">/mo</span>
         </div>
-        {listing.availableSlots <= 2 && (
+        {listing.available_slots <= 2 && (
           <div className="absolute top-3 right-3 bg-soft-red text-white text-xs font-semibold px-2 py-0.5 rounded-full">
-            {listing.availableSlots === 1 ? "Last slot!" : `${listing.availableSlots} slots left`}
+            {listing.available_slots === 1 ? "Last slot!" : `${listing.available_slots} slots left`}
           </div>
         )}
       </div>
@@ -55,46 +78,47 @@ export default function ListingCard({ listing }: { listing: Listing }) {
           >
             {listing.title}
           </h3>
-          <div className="flex items-center gap-1 flex-shrink-0">
-            <Star size={12} className="text-golden fill-golden" />
-            <span className="text-charcoal text-xs font-semibold" style={{ fontFamily: "var(--font-plus-jakarta)" }}>
-              {listing.rating}
-            </span>
-            <span className="text-charcoal/40 text-xs" style={{ fontFamily: "var(--font-inter)" }}>
-              ({listing.reviews})
-            </span>
-          </div>
+          {listing.review_count > 0 && (
+            <div className="flex items-center gap-1 shrink-0">
+              <Star size={12} className="text-golden fill-golden" />
+              <span className="text-charcoal text-xs font-semibold" style={{ fontFamily: "var(--font-plus-jakarta)" }}>
+                {listing.average_rating.toFixed(1)}
+              </span>
+              <span className="text-charcoal/40 text-xs" style={{ fontFamily: "var(--font-inter)" }}>
+                ({listing.review_count})
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-1 mb-3">
-          <MapPin size={11} className="text-coral flex-shrink-0" />
+          <MapPin size={11} className="text-coral shrink-0" />
           <span className="text-charcoal-light text-xs" style={{ fontFamily: "var(--font-inter)" }}>
-            {listing.location} ·{" "}
-            <span className="text-coral font-medium">{listing.nearSchool}</span>
+            {listing.barangay ? `${listing.barangay}, ` : ""}{listing.city}
           </span>
         </div>
 
         <div className="flex flex-wrap gap-1.5 mb-4">
           <span className="bg-warm-white text-charcoal text-xs px-2 py-0.5 rounded-full border border-warm-white-dark capitalize">
-            {listing.type.replace("_", " ")}
+            {listing.listing_type.replace("_", " ")}
           </span>
           <span className="bg-warm-white text-charcoal text-xs px-2 py-0.5 rounded-full border border-warm-white-dark capitalize">
-            {listing.gender === "female_only" ? "Female Only" : listing.gender === "male_only" ? "Male Only" : "Mixed"}
+            {listing.gender_policy === "female_only" ? "Female Only" : listing.gender_policy === "male_only" ? "Male Only" : "Mixed"}
           </span>
-          {listing.inclusions.slice(0, 2).map((inc) => (
-            <span key={inc} className="bg-leaf/10 text-leaf text-xs px-2 py-0.5 rounded-full">
+          {amenities.slice(0, 2).map((inc) => (
+            <span key={inc} className="bg-leaf/10 text-leaf text-xs px-2 py-0.5 rounded-full capitalize">
               {inc}
             </span>
           ))}
-          {listing.inclusions.length > 2 && (
+          {amenities.length > 2 && (
             <span className="bg-leaf/10 text-leaf text-xs px-2 py-0.5 rounded-full">
-              +{listing.inclusions.length - 2}
+              +{amenities.length - 2}
             </span>
           )}
         </div>
 
         <Link
-          href={`/listing/${listing.id}`}
+          href={`/listing/${slug}`}
           className="mt-auto block w-full text-center bg-coral/8 text-coral font-semibold text-sm py-2.5 rounded-xl hover:bg-coral hover:text-white transition-all duration-200"
           style={{ fontFamily: "var(--font-plus-jakarta)" }}
         >

@@ -4,7 +4,7 @@ import { MapPin, Star } from "lucide-react";
 
 const mockListings = [
   {
-    id: 1,
+    slug: "tita-nenas-boarding-house-lahug",
     title: "Tita Nena's Boarding House",
     location: "Lahug, Cebu City",
     nearSchool: "Near USC",
@@ -21,7 +21,7 @@ const mockListings = [
     coverColor: "from-coral/20 to-golden/10",
   },
   {
-    id: 2,
+    slug: "casa-verde-bedspace-talamban",
     title: "Casa Verde Bedspace",
     location: "Talamban, Cebu City",
     nearSchool: "Near CIT-U",
@@ -38,7 +38,7 @@ const mockListings = [
     coverColor: "from-leaf/20 to-navy/10",
   },
   {
-    id: 3,
+    slug: "kuya-bens-studio-room-banilad",
     title: "Kuya Ben's Studio Room",
     location: "Banilad, Cebu City",
     nearSchool: "Near UV Visayas",
@@ -55,7 +55,7 @@ const mockListings = [
     coverColor: "from-navy/15 to-coral/8",
   },
   {
-    id: 4,
+    slug: "mabolo-bedspace-for-girls",
     title: "Mabolo Bedspace for Girls",
     location: "Mabolo, Cebu City",
     nearSchool: "Near Cebu Normal",
@@ -72,7 +72,7 @@ const mockListings = [
     coverColor: "from-golden/20 to-coral/10",
   },
   {
-    id: 5,
+    slug: "urgello-monthly-room",
     title: "Urgello Monthly Room",
     location: "Urgello, Cebu City",
     nearSchool: "Near Cebu Doc",
@@ -89,7 +89,7 @@ const mockListings = [
     coverColor: "from-coral/15 to-navy/8",
   },
   {
-    id: 6,
+    slug: "mandaue-working-adults-house",
     title: "Mandaue Working Adults House",
     location: "Centro, Mandaue City",
     nearSchool: "Business District",
@@ -187,7 +187,7 @@ function ListingCard({ listing }: { listing: typeof mockListings[0] }) {
         </div>
 
         <Link
-          href={`/listing/${listing.id}`}
+          href={`/listing/${listing.slug}`}
           className="block w-full text-center bg-coral/8 text-coral font-semibold text-sm py-2.5 rounded-xl hover:bg-coral hover:text-white transition-all duration-200"
           style={{ fontFamily: "var(--font-plus-jakarta)" }}
         >
@@ -219,7 +219,7 @@ export default function FeaturedListings() {
             </h2>
           </div>
           <Link
-            href="/listings"
+            href="/cebu"
             className="text-coral font-semibold text-sm flex items-center gap-1.5 hover:gap-3 transition-all duration-200 flex-shrink-0"
             style={{ fontFamily: "var(--font-plus-jakarta)" }}
           >
@@ -230,14 +230,14 @@ export default function FeaturedListings() {
         {/* Horizontal scroll on mobile, grid on desktop */}
         <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-5 overflow-x-auto sm:overflow-visible pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
           {mockListings.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
+            <ListingCard key={listing.slug} listing={listing} />
           ))}
         </div>
 
         {/* CTA below listings */}
         <div className="text-center mt-10">
           <Link
-            href="/listings"
+            href="/cebu"
             className="inline-flex items-center gap-2 bg-navy text-white font-semibold text-sm px-8 py-3.5 rounded-xl hover:bg-navy-light transition-colors shadow-sm"
             style={{ fontFamily: "var(--font-plus-jakarta)" }}
           >

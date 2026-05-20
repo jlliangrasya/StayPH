@@ -86,8 +86,8 @@ export default async function BrowsePage({ params, searchParams }: PageProps) {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-                  {listings.map((listing) => (
-                    <ListingCard key={listing.id} listing={listing} />
+                  {listings.map((listing, i) => (
+                    <ListingCard key={listing.id} listing={listing} index={i} />
                   ))}
                 </div>
               )}

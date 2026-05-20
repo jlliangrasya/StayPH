@@ -223,7 +223,7 @@ function StepProperty({ form, set, errors }: { form: FormData; set: (k: keyof Fo
       <div className="space-y-4">
         <div>
           <Label required>Listing Title</Label>
-          <input className={inputClass(!!errors.title)} placeholder='e.g. "Tita Nena\'s Boarding House in Lahug"'
+          <input className={inputClass(!!errors.title)} placeholder='e.g. "Tita Nenas Boarding House in Lahug"'
             value={form.title} onChange={(e) => set("title", e.target.value)} style={{ fontFamily: "var(--font-inter)" }} />
           <Error msg={errors.title} />
         </div>

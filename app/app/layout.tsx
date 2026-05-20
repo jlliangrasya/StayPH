@@ -45,12 +45,6 @@ export const metadata: Metadata = {
     locale: "en_PH",
     type: "website",
   },
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "StayPH",
-  },
 };
 
 export default function RootLayout({

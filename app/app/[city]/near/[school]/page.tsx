@@ -94,7 +94,7 @@ export default async function NearSchoolPage({ params, searchParams }: PageProps
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                   {listings.map((listing) => (
                     <div key={listing.id} className="relative">
-                      <ListingCard listing={listing} />
+                      <ListingCard listing={listing} index={0} />
                       {/* Distance badge */}
                       <div
                         className="absolute top-52 left-3 bg-white/90 backdrop-blur-sm text-navy text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm border border-warm-white-dark"

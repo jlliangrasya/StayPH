@@ -25,9 +25,7 @@ export const MOCK_LISTINGS: ListingDetail[] = [
     house_rules:
       "No overnight male guests. Curfew at 10 PM on weekdays, 11 PM on weekends. No loud music after 9 PM. Clean common areas after use. Garbage must be sorted. Report any repairs immediately to Tita Nena.",
     status: "active",
-    is_phone_verified: true,
     is_id_verified: true,
-    is_property_verified: true,
     is_photo_verified: true,
     is_admin_verified: true,
     is_site_visited: true,
@@ -88,9 +86,7 @@ export const MOCK_LISTINGS: ListingDetail[] = [
     house_rules:
       "Mixed boarding house — male and female floors are separate. Common kitchen is shared. Curfew at 11 PM. No smoking inside. Guests allowed until 9 PM only. Weekly room inspection every Saturday.",
     status: "active",
-    is_phone_verified: true,
     is_id_verified: true,
-    is_property_verified: true,
     is_photo_verified: true,
     is_admin_verified: true,
     is_site_visited: false,
@@ -149,9 +145,7 @@ export const MOCK_LISTINGS: ListingDetail[] = [
     house_rules:
       "No parties or loud noise after 10 PM. Keep hallways clean. Report maintenance issues within 24 hours. No subletting. Guests must register at the front desk.",
     status: "active",
-    is_phone_verified: true,
     is_id_verified: true,
-    is_property_verified: true,
     is_photo_verified: true,
     is_admin_verified: true,
     is_site_visited: true,
@@ -214,9 +208,7 @@ export const MOCK_LISTINGS: ListingDetail[] = [
     house_rules:
       "Female tenants only. Curfew strictly at 9:30 PM. No male guests beyond the living room. Rooms are inspected every 2 weeks. Rent due on the 5th of every month.",
     status: "active",
-    is_phone_verified: true,
     is_id_verified: true,
-    is_property_verified: true,
     is_photo_verified: true,
     is_admin_verified: true,
     is_site_visited: true,
@@ -275,9 +267,7 @@ export const MOCK_LISTINGS: ListingDetail[] = [
     house_rules:
       "No cooking inside the room. Common kitchen is available 6 AM–9 PM. Visitors allowed until 8 PM. Keep noise levels low — many tenants have shifting schedules.",
     status: "active",
-    is_phone_verified: true,
     is_id_verified: true,
-    is_property_verified: false,
     is_photo_verified: true,
     is_admin_verified: true,
     is_site_visited: false,
@@ -335,9 +325,7 @@ export const MOCK_LISTINGS: ListingDetail[] = [
     house_rules:
       "Professional tenants preferred. No subletting. Guests must be registered at the front desk. Small pets allowed with ₱500 pet deposit. Cooking allowed in designated kitchen area only.",
     status: "active",
-    is_phone_verified: true,
     is_id_verified: true,
-    is_property_verified: true,
     is_photo_verified: true,
     is_admin_verified: true,
     is_site_visited: true,
@@ -402,9 +390,7 @@ export const MOCK_LISTINGS: ListingDetail[] = [
     house_rules:
       "Curfew at 10:30 PM. No cooking inside rooms. Shared bathrooms cleaned by staff every morning. Visitors allowed in common area only until 8 PM.",
     status: "active",
-    is_phone_verified: true,
     is_id_verified: false,
-    is_property_verified: false,
     is_photo_verified: true,
     is_admin_verified: false,
     is_site_visited: false,
@@ -461,9 +447,7 @@ export const MOCK_LISTINGS: ListingDetail[] = [
     house_rules:
       "Female tenants only. Curfew at 10 PM. Optional meals available. No smoking anywhere on the property. Keep common areas tidy. Laundry area open 7 AM to 7 PM.",
     status: "active",
-    is_phone_verified: true,
     is_id_verified: true,
-    is_property_verified: false,
     is_photo_verified: true,
     is_admin_verified: true,
     is_site_visited: false,

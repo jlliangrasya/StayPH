@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SlidersHorizontal, X } from "lucide-react";
 import ListingCard from "@/components/listings/ListingCard";
 import ListingsFilter from "@/components/listings/ListingsFilter";
-import { type Listing } from "@/lib/mock-listings";
+import type { Listing } from "@/lib/types";
 
 type Props = {
   listings: Listing[];
@@ -51,8 +51,8 @@ export default function ListingsClient({ listings, total }: Props) {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-              {listings.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
+              {listings.map((listing, i) => (
+                <ListingCard key={listing.id} listing={listing} index={i} />
               ))}
             </div>
           )}

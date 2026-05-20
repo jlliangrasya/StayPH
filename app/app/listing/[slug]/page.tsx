@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import Link from "next/link"
-import dynamic from "next/dynamic"
 import {
   MapPin, Star, Users, BedDouble, ShieldCheck,
   Clock, UtensilsCrossed, Wifi, Droplets, Zap, Wind,
@@ -11,10 +10,9 @@ import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import PhotoGallery from "@/components/listing/PhotoGallery"
 import ContactCard from "@/components/listing/ContactCard"
+import ListingMap from "@/components/listing/ListingMap"
 import { getListing } from "@/lib/listings"
 import type { ListingDetail } from "@/lib/types"
-
-const ListingMap = dynamic(() => import("@/components/listing/ListingMap"), { ssr: false })
 
 interface PageProps {
   params: Promise<{ slug: string }>
