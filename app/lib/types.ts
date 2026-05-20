@@ -206,3 +206,83 @@ export interface Bookmark {
   listing_id: string
   created_at: string
 }
+
+// ─── Verification Documents ───────────────────────────────────────────────────
+
+export type VerificationDocType =
+  | 'gov_id'
+  | 'school_id'
+  | 'enrollment'
+  | 'company_id'
+  | 'coe'
+  | 'tax_declaration'
+  | 'title'
+  | 'lease_contract'
+  | 'barangay_cert'
+
+export type VerificationDocStatus = 'pending' | 'approved' | 'rejected'
+
+export type VerificationDocOwner = 'tenant' | 'landlord'
+
+export interface VerificationDocument {
+  id: string
+  owner_type: VerificationDocOwner
+  owner_id: string
+  owner_name: string
+  listing_id: string | null
+  listing_title: string | null
+  doc_type: VerificationDocType
+  file_url: string
+  file_name: string
+  notes: string | null
+  status: VerificationDocStatus
+  reviewed_by: string | null
+  rejection_reason: string | null
+  submitted_at: string
+  reviewed_at: string | null
+}
+
+// ─── Visit Reports ─────────────────────────────────────────────────────────────
+
+export type VisitRecommendation = 'preferred' | 'admin_verified' | 'needs_improvement' | 'reject'
+export type VisitType = 'physical' | 'video_call'
+
+export interface VisitChecklist {
+  cleanliness: boolean
+  ventilation: boolean
+  safety_exits: boolean
+  cctv_present: boolean
+  water_supply: boolean
+  electricity_stable: boolean
+  matches_photos: boolean
+  landlord_cooperative: boolean
+}
+
+export interface VisitReport {
+  id: string
+  listing_id: string
+  listing_title: string
+  verifier_id: string
+  verifier_name: string
+  visit_type: VisitType
+  visited_at: string
+  recommendation: VisitRecommendation
+  checklist: VisitChecklist
+  photos: string[]
+  notes: string
+  latitude: number | null
+  longitude: number | null
+  created_at: string
+}
+
+// ─── Price History ─────────────────────────────────────────────────────────────
+
+export interface PriceHistory {
+  id: string
+  listing_id: string
+  old_price: number | null
+  new_price: number
+  changed_by: string
+  change_reason: string | null
+  changed_at: string
+}

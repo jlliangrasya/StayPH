@@ -12,6 +12,7 @@ import PhotoGallery from "@/components/listing/PhotoGallery"
 import ContactCard from "@/components/listing/ContactCard"
 import ListingMap from "@/components/listing/ListingMap"
 import ListingDetailClient from "@/components/listing/ListingDetailClient"
+import PriceHistory from "@/components/listing/PriceHistory"
 import { getListing } from "@/lib/listings"
 import type { ListingDetail } from "@/lib/types"
 
@@ -280,6 +281,12 @@ export default async function ListingPage({ params }: PageProps) {
                   </div>
                 </>
               )}
+
+              {/* Price history */}
+              <hr className="border-warm-white-dark my-6" />
+              <div className="mb-6">
+                <PriceHistory listingId={listing.id} />
+              </div>
 
               {/* Landlord profile */}
               {listing.landlord && (
