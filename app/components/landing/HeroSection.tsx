@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Search, MapPin, ShieldCheck, Eye } from "lucide-react";
+import { ShieldCheck, Eye } from "lucide-react";
+import HeroSearch from "@/components/landing/HeroSearch";
 
 export default function HeroSection() {
   return (
